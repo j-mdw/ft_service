@@ -1,6 +1,5 @@
 FROM	alpine:latest
 
-
 #NGINX installation
 
 COPY	srcs/default.conf /etc/nginx/http.d/

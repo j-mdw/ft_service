@@ -12,7 +12,7 @@ cp *.pem ../nginx/srcs
 cd ..
 #minikube delete
 #minikube start --driver=docker
-##eval $(minikube -p minikube docker-env) #in order for minikube to look for docker images locally
+#eval $(minikube -p minikube docker-env) #in order for minikube to look for docker images locally
 
 #image build
 
