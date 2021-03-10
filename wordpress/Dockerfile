@@ -1,26 +1,21 @@
 FROM	alpine:latest
 
-EXPOSE	80
-
 #NGINX installation
 
-RUN		apk update && \
-#		apk add openssl curl ca-certificates && \
-#		printf "%s%s%s\n" \
-#		"http://nginx.org/packages/alpine/v" \
-#		`egrep -o '^[0-9]+\.[0-9]+' /etc/alpine-release` \
-#		"/main" \
-#		| tee -a /etc/apk/repositories && \
-#		curl -o /tmp/nginx_signing.rsa.pub https://nginx.org/keys/nginx_signing.rsa.pub && \
-#		openssl rsa -pubin -in /tmp/nginx_signing.rsa.pub -text -noout && \
-#		mv /tmp/nginx_signing.rsa.pub /etc/apk/keys/ && \
+COPY	srcs/default.conf /etc/nginx/http.d/
+COPY	srcs/index.html /var/www/localhost/htdocs/
+
+RUN	\	
 		apk add nginx && \
-		apk add php-fpm && \
-		apk add php-mysqli && \
-		mkdir -p /run/nginx
+		mkdir -p /run/nginx && \
 
-#Wordpress installation
+WORKDIR	/var/www/localhost/htdocs
 
-#RUN
+ADD		https://wordpress.org/latest.tar.gz .
+
+RUN		tar -xf latest.tar.gz && \
+		rm latest.tar.gz
+
+EXPOSE	5050
 
 CMD		["nginx", "-g", "daemon off;"]

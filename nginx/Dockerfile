@@ -5,8 +5,11 @@ FROM	alpine:latest
 
 COPY	srcs/default.conf /etc/nginx/http.d/
 COPY	srcs/index.html /var/www/localhost/htdocs/
-COPY	srcs/cert.pem /etc/nginx
-COPY	srcs/key.pem /etc/nginx
+
+RUN		mkdir /root/certs
+
+COPY	srcs/cert.pem /root/certs
+COPY	srcs/key.pem /root/certs
 
 RUN	\	
 #		apk add openssl curl ca-certificates && \
