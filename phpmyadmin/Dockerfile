@@ -3,29 +3,30 @@ FROM	alpine:latest
 #NGINX installation
 
 COPY	srcs/default.conf /etc/nginx/http.d/
-#COPY	srcs/index.html /var/www/localhost/htdocs/
 
-RUN	\	
+RUN	\
 		apk add\
 		nginx\
 		php\
 		php-opcache\
 		php-fpm\
 		php-json\
-		php-session\
 		php-mbstring\
+		php-xml\
+		php-iconv\
+		php-session\
 		php-mysqli &&\
 		mkdir -p /run/nginx
 
 WORKDIR	/var/www/localhost/htdocs
 
-ADD		https://wordpress.org/latest.tar.gz .
+ADD		https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-english.tar.gz .
 
-RUN		tar -xf latest.tar.gz && \
-			rm latest.tar.gz &&\
-			ls &&\
-			chmod -R 777 wordpress
+RUN		tar -xf phpMyAdmin-latest-english.tar.gz &&\
+			rm phpMyAdmin-latest-english.tar.gz &&\
+			mv php* phpmyadmin &&\
+			chmod -R 777 phpmyadmin 
 
-EXPOSE	5050
+EXPOSE	5000
 
 CMD		["/bin/sh", "-c", "/usr/sbin/php-fpm7; exec nginx -g 'daemon off;';"]
