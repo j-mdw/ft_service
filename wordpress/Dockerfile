@@ -8,10 +8,12 @@ COPY	srcs/default.conf /etc/nginx/http.d/
 RUN	\	
 		apk add\
 		nginx\
-		php7\
-		php7-fpm\
-		php7-opcache\
-		php7-mysqli &&\
+#		php7\
+#		php7-fpm\
+#		php7-opcache\
+#		php7-mysqli &&\
+		php-fpm\
+		php-mysqli &&\
 		mkdir -p /run/nginx
 
 WORKDIR	/var/www/localhost/htdocs
@@ -19,9 +21,10 @@ WORKDIR	/var/www/localhost/htdocs
 ADD		https://wordpress.org/latest.tar.gz .
 
 RUN		tar -xf latest.tar.gz && \
-		rm latest.tar.gz
+			rm latest.tar.gz &&\
+			ls &&\
+			chmod -R 777 wordpress
 
 EXPOSE	5050
 
-#CMD		nginx -g "daemon off";\
-#		php-fpm7 start
+CMD		["/bin/sh", "-c", "/usr/sbin/php-fpm7; exec nginx -g 'daemon off;';"]
