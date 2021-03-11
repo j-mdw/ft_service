@@ -16,7 +16,9 @@ cd ..
 
 #image build
 
-##docker build nginx/ -t nginx-service	 #nginx image build
+docker build nginx/ -t nginx-service	 #nginx image build
+docker build wordpress/ -t wordpress-service
+docker build phpmyadmin/ -t phpmyadmin-service
 
 ##kubectl apply -f nginx/depl_nginx.yaml #nginx service deployment
 

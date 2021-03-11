@@ -2,11 +2,10 @@ FROM	alpine:latest
 
 #MYSQL installation
 
-#RUN		apk add\
-#			mysql\
-#			mysql-client
+RUN		apk add\
+		mysql\
+		mysql-client\
+		mariadb-server-utils
+#COPY	srcs/mysql_setup.sh /
 
-COPY	srcs/mysql_setup.sh /
-
-#CMD		sh mysql_setup.sh; \
-#			/etc/init.d/mysql start
+#CMD	mysql_install_db	
