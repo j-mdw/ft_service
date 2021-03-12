@@ -1,0 +1,2 @@
+Set variables IP & WPPORT for nginx redir to wordpress
+Set variable PMAPORT for nginx redir to phpmyadmin
