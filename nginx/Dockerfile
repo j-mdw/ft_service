@@ -5,6 +5,10 @@ FROM	alpine:latest
 COPY	srcs/default.conf /etc/nginx/http.d/
 COPY	srcs/index.html /var/www/localhost/htdocs/
 
+ENV		IP
+ENV		PMAPORT
+ENV		WPPORT
+
 RUN		mkdir /root/certs
 
 COPY	srcs/cert.pem /root/certs
@@ -25,4 +29,7 @@ RUN	\
 		
 EXPOSE	80 443
 
-CMD		["nginx", "-g", "daemon off;"]
+CMD		sed -i s/PMAPORT/"${PMAPORT}"/ /etc/nginx/http.d/default.conf && \ 
+			sed -i s/WPPORT/"${PMAPORT}"/ /etc/nginx/http.d/default.conf && \ 
+			sed -i s/IP/"${IP}"/g /etc/nginx/http.d/default.conf && \
+			nginx -g "daemon off;"

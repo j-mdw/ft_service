@@ -21,6 +21,22 @@ spec:
         ports:
         - containerPort: 80
         - containerPort: 443
+        env:
+        - name: IP
+          valueFrom:
+            configMapKeyRef:
+              name: service_configmap
+              key: ext_ip
+        - name: WPPORT
+          valueFrom:
+            configMapKeyRef:
+              name: service_configmap
+              key: wp_port
+        - name: PMAPORT
+          valueFrom:
+            configMapKeyRef:
+              name: service_configmap
+              key: pma_port
 ---
 apiVersion: v1
 kind: Service

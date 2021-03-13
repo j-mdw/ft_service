@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: service_configmap
 data:
-  ext_ip: 192.168.49.3
+  ext_ip: 192.168.49.3 192.168.49.3 192.168.49.3
   wp_port: 5050
   pma_port: 5000
