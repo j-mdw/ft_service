@@ -1,2 +1,3 @@
-Set variables IP & WPPORT for nginx redir to wordpress
-Set variable PMAPORT for nginx redir to phpmyadmin
+Set variables in nginx config file: IP, WPPORT, PMAPORT
+
+TMtut

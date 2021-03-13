@@ -1,43 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-depl
+  name: wordpress-depl
   labels:
-    app: nginx	#key value paire that will stick to it - this will be used by the service
+    app: wordpress	#key value paire that will stick to it - this will be used by the service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: wordpress
   template: #config file inside of config file.. = pod blueprint
     metadata:
       labels:
-        app: nginx
+        app: wordpress
     spec:
       containers:
-      - name: nginx
-        image: nginx-service:latest
+      - name: wordpress
+        image: wordpress-service:latest
         imagePullPolicy: Never
         ports:
-        - containerPort: 80
-        - containerPort: 443
+        - containerPort: 5050 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: wordpress-service
   annotations:
     metallb.universe.tf/allow-shared-ip: shared
 spec:
   selector:
-    app: nginx
+    app: wordpress 
   type: LoadBalancer
   ports:
   - name: http
     protocol: TCP
-    port: 80
-    targetPort: 80
-  - name: https
-    protocol: TCP
-    port: 443
-    targetPort: 443
+    port: 5050 
+    targetPort: 5050 
