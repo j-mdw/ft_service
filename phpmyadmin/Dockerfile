@@ -4,6 +4,11 @@ FROM	alpine:latest
 
 COPY	srcs/default.conf /etc/nginx/http.d/
 
+RUN		mkdir /root/certs
+
+COPY	srcs/cert.pem /root/certs
+COPY	srcs/key.pem /root/certs
+
 RUN	\
 		apk add\
 		nginx\

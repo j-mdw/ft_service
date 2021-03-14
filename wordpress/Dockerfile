@@ -3,7 +3,11 @@ FROM	alpine:latest
 #NGINX installation
 
 COPY	srcs/default.conf /etc/nginx/http.d/
-#COPY	srcs/index.html /var/www/localhost/htdocs/
+
+RUN		mkdir /root/certs
+
+COPY	srcs/cert.pem /root/certs
+COPY	srcs/key.pem /root/certs
 
 RUN	\	
 		apk add\

@@ -25,17 +25,17 @@ spec:
         - name: IP
           valueFrom:
             configMapKeyRef:
-              name: service_configmap
+              name: service-configmap
               key: ext_ip
         - name: WPPORT
           valueFrom:
             configMapKeyRef:
-              name: service_configmap
+              name: service-configmap
               key: wp_port
         - name: PMAPORT
           valueFrom:
             configMapKeyRef:
-              name: service_configmap
+              name: service-configmap
               key: pma_port
 ---
 apiVersion: v1
