@@ -20,6 +20,12 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 5000 
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: ftservice-secrets
+                key: mysql-root-pwd
 ---
 apiVersion: v1
 kind: Service
