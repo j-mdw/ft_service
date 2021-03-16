@@ -28,9 +28,15 @@ WORKDIR	/var/www/localhost/htdocs
 ADD		https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-english.tar.gz .
 
 RUN		tar -xf phpMyAdmin-latest-english.tar.gz &&\
-			rm phpMyAdmin-latest-english.tar.gz &&\
-			mv php* phpmyadmin &&\
-			chmod -R 777 phpmyadmin 
+		rm phpMyAdmin-latest-english.tar.gz &&\
+		mv php* phpmyadmin &&\
+		chmod -R 777 phpmyadmin
+
+ARG		DNS="mysql-service.default.svc.cluster.local"
+
+RUN		sed -i s/localhost/"${DNS}"/g phpmyadmin/config.sample.inc.php && \
+		mv phpmyadmin/config.sample.inc.php phpmyadmin/config.inc.php && \
+		chmod -R 444 phpmyadmin/config.inc.php
 
 EXPOSE	5000
 

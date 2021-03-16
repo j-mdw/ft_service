@@ -5,8 +5,10 @@ metadata:
 spec:
   selector:
     app: mysql
+  type: ClusterIP
   ports:
   - port: 3306
+    targetPort: 3306
 ---
 apiVersion: apps/v1
 kind: Deployment
