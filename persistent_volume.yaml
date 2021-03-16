@@ -10,7 +10,7 @@ spec:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Delete #when persistent volume claim is deleted, data is deleted
   hostPath:
-    path: "/mnt/data"
+    path: "/data/lemp-pv"
 # ---
 # apiVersion: v1
 # kind: PersistentVolumeClaim
