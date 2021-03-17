@@ -21,12 +21,17 @@ pv_yaml="persistent_volume.yaml"
 secret_yaml="secrets.yaml"
 ftp_yaml="$ftp_dir""ftps_depl.yaml"
 
-#   Scripts
-mlb_install="$mlb_dir""metallb_install.sh"
-
 #   Script exits when any command fails
 
 set -e
+
+#	Minikube setup
+# minikube delete
+# minikube start --driver=docker
+eval $(minikube -p minikube docker-env) #in order for minikube to look for docker images locally
+
+#   Scripts
+mlb_install="$mlb_dir""metallb_install.sh"
 
 #	Stopping nginx on localhost
 
@@ -34,25 +39,20 @@ set -e
 
 #	Creating TLS certificates
 
- mkdir -p certs
- cd certs
- chmod -f 666 key.pem
- openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -batch -out cert.pem -keyout key.pem
- chmod 666 key.pem
- cd ..
- cp -f certs/*.pem "$ngx_dir"srcs
- cp -f certs/*.pem "$wp_dir"srcs
- cp -f certs/*.pem "$pma_dir"srcs
- chmod 400 certs/key.pem "$ngx_dir"srcs/key.pem "$wp_dir"srcs/key.pem "$pma_dir"srcs/key.pem 
-
-#	Minikube setup
-minikube delete
-minikube start --driver=docker
-eval $(minikube -p minikube docker-env) #in order for minikube to look for docker images locally
+#  mkdir -p certs
+#  cd certs
+#  chmod -f 666 key.pem
+#  openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -batch -out cert.pem -keyout key.pem
+#  chmod 666 key.pem
+#  cd ..
+#  cp -f certs/*.pem "$ngx_dir"srcs
+#  cp -f certs/*.pem "$wp_dir"srcs
+#  cp -f certs/*.pem "$pma_dir"srcs
+#  chmod 400 certs/key.pem "$ngx_dir"srcs/key.pem "$wp_dir"srcs/key.pem "$pma_dir"srcs/key.pem 
 
 #   Metallab install and start
 
-sh "$mlb_install"
+# sh "$mlb_install"
 
 k8s_ip=$(kubectl describe service/kubernetes | grep -i endpoints | grep -E -o "(([0-9]{1,3}[\.]){3})([0-9]{1,3}){1}")
 echo $k8s_ip

@@ -1,9 +1,5 @@
 #!/bin/sh
 
-mysql -u root <<EOF
-CREATE DATABASE wordpress;
-GRANT ALL PRIVILEGES ON *.* TO 'user1'@'%' IDENTIFIED BY 'user1';
-GRANT ALL PRIVILEGES ON *.* TO 'user2'@'%' IDENTIFIED BY 'user2';
-GRANT ALL PRIVILEGES ON *.* TO 'user3'@'%' IDENTIFIED BY 'user3';
-FLUSH PRIVILEGES;
-EOF
+mysql_install_db --user=root --datadir="/var/lib/mysql"
+
+/usr/bin/mysqld_safe --datadir='/var/lib/mysql' --user=root --init_file=/myslq_init

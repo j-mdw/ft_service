@@ -32,7 +32,8 @@ RUN		tar -xf phpMyAdmin-latest-english.tar.gz &&\
 		mv php* phpmyadmin &&\
 		chmod -R 777 phpmyadmin
 
-ARG		DNS="mysql-service.default.svc.cluster.local"
+# ARG		DNS="mysql-service.default.svc.cluster.local"
+ARG 		DNS="mysql-service"
 
 RUN		sed -i s/localhost/"${DNS}"/g phpmyadmin/config.sample.inc.php && \
 		mv phpmyadmin/config.sample.inc.php phpmyadmin/config.inc.php && \

@@ -1,0 +1,6 @@
+use mysql;
+CREATE DATABASE IF NOT EXISTS wordpress;
+GRANT ALL PRIVILEGES ON wordpress.* TO 'user1'@'%' IDENTIFIED BY 'user1';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'user2'@'%' IDENTIFIED BY 'user2';
+GRANT ALL PRIVILEGES ON wrodpress.* TO 'user3'@'%' IDENTIFIED BY 'user3';
+FLUSH PRIVILEGES;
