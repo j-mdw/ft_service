@@ -19,7 +19,7 @@ msq_yaml="$msq_dir""depl_mysql.yaml"
 cnf_map="service_configmap.yaml"
 pv_yaml="persistent_volume.yaml"
 secret_yaml="secrets.yaml"
-ftp_yaml="$ftp_dir""ftps_depl.yaml"
+ftp_yaml="$ftp_dir""depl_ftps.yaml"
 
 #   Script exits when any command fails
 
@@ -27,7 +27,7 @@ set -e
 
 #	Minikube setup
 # minikube delete
-# minikube start --driver=docker
+minikube start --driver=docker
 eval $(minikube -p minikube docker-env) #in order for minikube to look for docker images locally
 
 #   Scripts
@@ -75,7 +75,7 @@ docker build $ngx_dir -t nginx-service
 docker build $wp_dir -t wordpress-service
 docker build $pma_dir -t phpmyadmin-service
 docker build $msq_dir -t mysql-service
-#docker build $ftp_dir -t ftps-service
+docker build $ftp_dir -t ftps-service
 
 #docker run --rm -d -p 80:80 -p 443:443 nginx-service
 #docker run --rm -d -p 5050:5050 wordpress-service
@@ -92,7 +92,7 @@ kubectl apply -f $msq_yaml
 kubectl apply -f $ngx_yaml
 kubectl apply -f $wp_yaml
 kubectl apply -f $pma_yaml
-#kubectl apply -f $ftp_yaml
+kubectl apply -f $ftp_yaml
 
 # Dashboard
 minikube dashboard & #open kubernetes dashboard
