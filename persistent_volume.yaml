@@ -3,23 +3,12 @@ kind: PersistentVolume
 metadata:
   name: lemp-pv
 spec:
-  storageClassName: manual
+  storageClassName: local-storage 
   capacity:
     storage: 500Mi
   accessModes:
   - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Delete #when persistent volume claim is deleted, data is deleted
+  persistentVolumeReclaimPolicy: Retain #when persistent volume claim is deleted, data is deleted
   hostPath:
     path: "/data/lemp-pv"
-# ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: mysql-pv-volume
-# spec:
-# #  storageClassName: local-storage
-#   accessModes:
-#   - ReadWriteOnce
-#   ressources:
-#     requests:
-#       storage: 500Mi
+    type: DirectoryOrCreate
