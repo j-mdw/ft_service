@@ -12,3 +12,4 @@ Influxdb
 
 Grafana
 - Try to use api to add influxdb database and create the dashboards
+- Datasources provisionning: change db address

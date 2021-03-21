@@ -1,9 +1,18 @@
 FROM	alpine:latest
 
-RUN     apk add grafana
+RUN     apk add \
+		grafana\
+		curl
 
-ENV		  GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION true
+COPY	srcs/dashboard_prov.yaml /usr/share/grafana/conf/provisioning/dashboards
 
+COPY	srcs/db_prov.yaml /usr/share/grafana/conf/provisioning/datasources
 
-CMD		cd /usr/share/grafana; \
-        grafana-server
+ENV				INFDB_NAME="telegrafdb"
+
+ENV				INFDB_USER="telegraf"
+
+ENV				INFDB_PW="password"
+
+#CMD		cd /usr/share/grafana; \
+#        grafana-server
