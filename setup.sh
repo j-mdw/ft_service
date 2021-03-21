@@ -27,7 +27,7 @@ set -e
 
 #	Minikube setup
 # minikube delete
-minikube start --driver=docker
+# minikube start --driver=docker
 eval $(minikube -p minikube docker-env) #in order for minikube to look for docker images locally
 
 #   Scripts

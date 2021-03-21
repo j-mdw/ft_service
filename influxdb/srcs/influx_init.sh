@@ -5,12 +5,11 @@ influxd &
 sleep 3
 
 influx << EOF
-create database telegrafdb
-create user telegraf with password 'password'
-grant all on telegrafdb to telegraph
+create database $INFDB_NAME;
+create user $INFDB_USER with password '$INFDB_PW';
+grant all on $INFDB_NAME to $INFDB_USER;
 EOF
 
-telegraf --config /etc/telegraf.conf.d/telegraf.conf
-#--config /etc/telegraf.conf
+#telegraf --config $TELEGRAF_CONFIG_PATH
 
 wait
