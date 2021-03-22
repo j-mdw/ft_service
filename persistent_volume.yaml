@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: lemp-pv
+  name: project-pv
 spec:
   storageClassName: local-storage 
   capacity:
@@ -10,5 +10,5 @@ spec:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Delete #Retain #when persistent volume claim is deleted, data is deleted
   hostPath:
-    path: "/data/lemp-pv"
+    path: "/data/project-pv"
     type: DirectoryOrCreate

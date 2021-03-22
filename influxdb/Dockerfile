@@ -10,13 +10,13 @@ RUN			apk add \
 
 #RUN			chown -R influxdb:influxdb /var/lib/influxdb
 
-ENV				TELEGRAF_CONFIG_PATH="/etc/telegraf.conf.d/telegraf.conf"
+# ENV				TELEGRAF_CONFIG_PATH="/etc/telegraf.conf.d/telegraf.conf"
 
-ENV				INFDB_NAME="telegrafdb"
+# ENV				INFDB_NAME="telegrafdb"
 
-ENV				INFDB_USER="telegraf"
+# ENV				INFDB_USER="telegraf"
 
-ENV				INFDB_PW="password"
+# ENV				INFDB_PW="password"
 #RUN				telegraf --input-filter docker --output-filter influxdb config > ${TELEGRAF_CONFIG_PATH}
 #RUN				telegraf --output-filter influxdb config > ${TELEGRAF_CONFIG_PATH}
 
@@ -29,7 +29,7 @@ ENV				INFDB_PW="password"
 
 COPY			srcs/influx_init.sh /
 
-EXPOSE		8086 8088
+EXPOSE			8086 8088
 
 CMD				sh influx_init.sh
 

@@ -3,6 +3,10 @@ kind: ConfigMap
 metadata:
   name: service-configmap
 data:
-  ext_ip: 192.168.49.3
+  EXT_IP: 192.168.49.3
   wp_port: "5050"
   pma_port: "5000"
+  TELEGRAF_CONFIG_PATH: "/etc/telegraf.conf.d/telegraf.conf"
+  INFDB_NAME: "telegrafdb"
+  INFDB_USER: "telegraf"
+  INFDB_PW: "password"

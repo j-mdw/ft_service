@@ -10,6 +10,4 @@ create user $INFDB_USER with password '$INFDB_PW';
 grant all on $INFDB_NAME to $INFDB_USER;
 EOF
 
-#telegraf --config $TELEGRAF_CONFIG_PATH
-
 wait

@@ -26,7 +26,7 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: service-configmap
-              key: ext_ip
+              key: EXT_IP
         - name: WPPORT
           valueFrom:
             configMapKeyRef:
