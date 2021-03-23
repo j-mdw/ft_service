@@ -37,6 +37,7 @@ spec:
             configMapKeyRef:
               name: service-configmap
               key: pma_port
+      restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service

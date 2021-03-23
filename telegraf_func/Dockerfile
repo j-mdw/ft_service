@@ -24,7 +24,9 @@ RUN			apk add \
 
 COPY		srcs/telegraf_setup.sh /
 
-#COPY		srcs/telegraf
+RUN			mkdir -p /etc/telegraf.conf.d
+
+COPY		srcs/telegraf.conf /etc/telegraf.conf.d/
 
 CMD			sh telegraf_setup.sh
 

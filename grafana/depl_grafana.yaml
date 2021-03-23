@@ -39,6 +39,7 @@ spec:
         envFrom:
         - configMapRef:
             name: service-configmap
+      restartPolicy: Always
         # env:
         #   - name: MYSQL_ROOT_PASSWORD
         #     valueFrom:

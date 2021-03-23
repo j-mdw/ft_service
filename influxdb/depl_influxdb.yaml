@@ -44,6 +44,7 @@ spec:
       - name: influxdb-pv-storage
         persistentVolumeClaim:
           claimName: influxdb-pv-claim
+      restartPolicy: Always
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

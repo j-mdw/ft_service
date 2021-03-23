@@ -19,7 +19,8 @@ spec:
         image: wordpress-service:latest
         imagePullPolicy: Never
         ports:
-        - containerPort: 5050 
+        - containerPort: 5050
+      restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service

@@ -4,7 +4,7 @@ RUN     apk add \
 		grafana\
 		curl
 
-COPY	srcs/dashboard_prov.yaml /usr/share/grafana/conf/provisioning/dashboards
+# COPY	srcs/dashboard_prov.yaml /usr/share/grafana/conf/provisioning/dashboards
 
 COPY	srcs/db_prov.yaml /usr/share/grafana/conf/provisioning/datasources
 

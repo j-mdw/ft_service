@@ -32,9 +32,9 @@ idb_yaml="$idb_dir""depl_influxdb.yaml"
 set -e
 
 #	Minikube setup
-# minikube delete
+#minikube delete
 # minikube start --driver=docker
-eval $(minikube -p minikube docker-env) #in order for minikube to look for docker images locally
+eval $(minikube -p minikube docker-env)
 
 #   Scripts
 mlb_install="$mlb_dir""metallb_install.sh"
@@ -71,14 +71,14 @@ echo $k8s_ip
 #k8s_ip="$k8s_ip$k8s_ip_last"
 #echo $k8s_ip
 sed -E -i "s/(([0-9]{1,3}[\.]){3}[0-9]{1,3}{1})/$k8s_ip/g" $mlb_yaml
-sed -E -i s/'  ext_ip:'".*"/"  ext_ip: ""$k8s_ip"/ $cnf_map
+sed -E -i s/'  EXT_IP:'".*"/"  EXT_IP: ""$k8s_ip"/ $cnf_map
 
 #Docker images build
-# docker build $ngx_dir -t nginx-service
-# docker build $wp_dir -t wordpress-service
-# docker build $pma_dir -t phpmyadmin-service
-# docker build $msq_dir -t mysql-service
-# docker build $ftp_dir -t ftps-service
+docker build $ngx_dir -t nginx-service
+docker build $wp_dir -t wordpress-service
+docker build $pma_dir -t phpmyadmin-service
+docker build $msq_dir -t mysql-service
+docker build $ftp_dir -t ftps-service
 docker build $idb_dir -t influxdb-service
 docker build $tgf_dir -t telegraf-service
 docker build $gfa_dir -t grafana-service
@@ -94,11 +94,11 @@ kubectl apply -f $pv_yaml
 kubectl apply -f $mlb_yaml
 kubectl apply -f $cnf_map
 kubectl apply -f $secret_yaml
-# kubectl apply -f $msq_yaml
-# kubectl apply -f $ngx_yaml
-# kubectl apply -f $wp_yaml
-# kubectl apply -f $pma_yaml
-# kubectl apply -f $ftp_yaml
+kubectl apply -f $msq_yaml
+kubectl apply -f $ngx_yaml
+kubectl apply -f $wp_yaml
+kubectl apply -f $pma_yaml
+kubectl apply -f $ftp_yaml
 kubectl apply -f $tgf_yaml
 kubectl apply -f $gfa_yaml
 kubectl apply -f $idb_yaml

@@ -19,7 +19,7 @@ no_anon_password=YES
 EOF
 
 mkdir /srv/ftp
-
+echo "anon" | tee /srv/ftp/anon.txt
 #chown nobody:nogroup /srv/ftp
 
 vsftpd

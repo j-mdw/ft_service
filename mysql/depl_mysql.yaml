@@ -39,6 +39,7 @@ spec:
       - name: mysql-pv-storage
         persistentVolumeClaim:
           claimName: mysql-pv-claim
+      restartPolicy: Always
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
