@@ -7,6 +7,7 @@ xferlog_enable=YES
 connect_from_port_20=YES
 pam_service_name=vsftpd
 seccomp_sandbox=NO
+#local_umask=022
 
 # Enable upload by local user.
 write_enable=YES
@@ -19,7 +20,9 @@ no_anon_password=YES
 EOF
 
 mkdir /srv/ftp
+
+chown nobody:nogroup /srv/ftp
+
 echo "anon" | tee /srv/ftp/anon.txt
-#chown nobody:nogroup /srv/ftp
 
 vsftpd
