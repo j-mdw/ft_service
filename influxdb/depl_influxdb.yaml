@@ -51,9 +51,9 @@ kind: PersistentVolumeClaim
 metadata:
   name: influxdb-pv-claim
 spec:
-  storageClassName: local-storage
+#  storageClassName: local-storage
   accessModes:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 200Mi
+      storage: 1Gi

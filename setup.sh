@@ -45,20 +45,22 @@ mlb_install="$mlb_dir""metallb_install.sh"
 
 #	Creating TLS certificates
 
-#  mkdir -p certs
-#  cd certs
-#  chmod -f 666 key.pem
-#  openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -batch -out cert.pem -keyout key.pem
-#  chmod 666 key.pem
-#  cd ..
-#  cp -f certs/*.pem "$ngx_dir"srcs
-#  cp -f certs/*.pem "$wp_dir"srcs
-#  cp -f certs/*.pem "$pma_dir"srcs
-#  chmod 400 certs/key.pem "$ngx_dir"srcs/key.pem "$wp_dir"srcs/key.pem "$pma_dir"srcs/key.pem 
+  mkdir -p certs
+  cd certs
+  chmod -f 666 key.pem
+  openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -batch -out cert.pem -keyout key.pem
+  chmod 666 key.pem
+  cd ..
+  cp -f certs/*.pem "$ngx_dir"srcs
+  cp -f certs/*.pem "$wp_dir"srcs
+  cp -f certs/*.pem "$pma_dir"srcs
+  cp -f certs/*.pem "$ftp_dir"srcs
+
+  chmod 400 certs/key.pem "$ngx_dir"srcs/key.pem "$wp_dir"srcs/key.pem "$pma_dir"srcs/key.pem "$ftp_dir"srcs/key.pem
 
 #   Metallab install and start
 
-# sh "$mlb_install"
+sh "$mlb_install"
 
 k8s_ip=$(kubectl describe service/kubernetes | grep -i endpoints | grep -E -o "(([0-9]{1,3}[\.]){3})([0-9]{1,3}){1}")
 echo $k8s_ip
@@ -74,10 +76,10 @@ sed -E -i "s/(([0-9]{1,3}[\.]){3}[0-9]{1,3}{1})/$k8s_ip/g" $mlb_yaml
 sed -E -i s/'  EXT_IP:'".*"/"  EXT_IP: ""$k8s_ip"/ $cnf_map
 
 #Docker images build
-docker build $ngx_dir -t nginx-service
-docker build $wp_dir -t wordpress-service
-docker build $pma_dir -t phpmyadmin-service
-docker build $msq_dir -t mysql-service
+#docker build $ngx_dir -t nginx-service
+#docker build $wp_dir -t wordpress-service
+#docker build $pma_dir -t phpmyadmin-service
+#docker build $msq_dir -t mysql-service
 docker build $ftp_dir -t ftps-service
 docker build $idb_dir -t influxdb-service
 docker build $tgf_dir -t telegraf-service
@@ -90,14 +92,14 @@ docker build $gfa_dir -t grafana-service
 
 # Cluster deployments
 
-kubectl apply -f $pv_yaml
+#kubectl apply -f $pv_yaml
 kubectl apply -f $mlb_yaml
 kubectl apply -f $cnf_map
 kubectl apply -f $secret_yaml
-kubectl apply -f $msq_yaml
-kubectl apply -f $ngx_yaml
-kubectl apply -f $wp_yaml
-kubectl apply -f $pma_yaml
+#kubectl apply -f $msq_yaml
+#kubectl apply -f $ngx_yaml
+#kubectl apply -f $wp_yaml
+#kubectl apply -f $pma_yaml
 kubectl apply -f $ftp_yaml
 kubectl apply -f $tgf_yaml
 kubectl apply -f $gfa_yaml

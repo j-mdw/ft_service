@@ -46,7 +46,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: mysql-pv-claim
 spec:
-  storageClassName: local-storage
+#  storageClassName: local-storage
   accessModes:
   - ReadWriteOnce
   resources:
