@@ -1,17 +1,8 @@
 Reverse Proxy - blank page issue
 
-Telegraf
-- Yaml Telegraf (with docker socket mount)
-- Use ENV_VAR to set IP address of influxdb : probably need to create a script as variables would be in the config-map
+Make ftps work - understand what a server like this is supposed to do and how it should be configured
 
-Influxdb
-- yaml
-- maybe put variables in config-map (could be useful for both telegraf and grafana)
-- PVC
-
-Grafana
-- Try to use api to add influxdb database and create the dashboards
-- Datasources provisionning: change db address
+Try other way to use Persistent Volumes, lots of bugs right now when deleting the PVC or even the PV
 
 K8s:
 - Put service on top of config files

@@ -27,17 +27,20 @@ tgf_yaml="$tgf_dir""depl_telegraf.yaml"
 gfa_yaml="$gfa_dir""depl_grafana.yaml"
 idb_yaml="$idb_dir""depl_influxdb.yaml"
 
-#   Script exits when any command fails
+#   Scripts
+
+mlb_install="$mlb_dir""metallb_install.sh"
+
+#   sh exits when any command fails
 
 set -e
 
 #	Minikube setup
-#minikube delete
-# minikube start --driver=docker
-eval $(minikube -p minikube docker-env)
 
-#   Scripts
-mlb_install="$mlb_dir""metallb_install.sh"
+#minikube delete
+minikube start --driver=docker
+
+eval $(minikube -p minikube docker-env)
 
 #	Stopping nginx on localhost
 
@@ -58,7 +61,7 @@ mlb_install="$mlb_dir""metallb_install.sh"
 
 #   Metallab install and start
 
-# sh "$mlb_install"
+sh "$mlb_install"
 
 k8s_ip=$(kubectl describe service/kubernetes | grep -i endpoints | grep -E -o "(([0-9]{1,3}[\.]){3})([0-9]{1,3}){1}")
 echo $k8s_ip
@@ -74,10 +77,10 @@ sed -E -i "s/(([0-9]{1,3}[\.]){3}[0-9]{1,3}{1})/$k8s_ip/g" $mlb_yaml
 sed -E -i s/'  EXT_IP:'".*"/"  EXT_IP: ""$k8s_ip"/ $cnf_map
 
 #Docker images build
-docker build $ngx_dir -t nginx-service
-docker build $wp_dir -t wordpress-service
-docker build $pma_dir -t phpmyadmin-service
-docker build $msq_dir -t mysql-service
+#docker build $ngx_dir -t nginx-service
+#docker build $wp_dir -t wordpress-service
+#docker build $pma_dir -t phpmyadmin-service
+#docker build $msq_dir -t mysql-service
 docker build $ftp_dir -t ftps-service
 docker build $idb_dir -t influxdb-service
 docker build $tgf_dir -t telegraf-service
@@ -94,10 +97,10 @@ kubectl apply -f $pv_yaml
 kubectl apply -f $mlb_yaml
 kubectl apply -f $cnf_map
 kubectl apply -f $secret_yaml
-kubectl apply -f $msq_yaml
-kubectl apply -f $ngx_yaml
-kubectl apply -f $wp_yaml
-kubectl apply -f $pma_yaml
+#kubectl apply -f $msq_yaml
+#kubectl apply -f $ngx_yaml
+#kubectl apply -f $wp_yaml
+#kubectl apply -f $pma_yaml
 kubectl apply -f $ftp_yaml
 kubectl apply -f $tgf_yaml
 kubectl apply -f $gfa_yaml

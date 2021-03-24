@@ -19,10 +19,10 @@ anon_root=/srv/ftp
 no_anon_password=YES
 EOF
 
-mkdir /srv/ftp
+mkdir -p /srv/ftp
 
 chown nobody:nogroup /srv/ftp
 
 echo "anon" | tee /srv/ftp/anon.txt
 
-vsftpd
+vsftpd /etc/vsftpd/vsftpd.conf
