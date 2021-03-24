@@ -4,7 +4,7 @@ RUN		apk add \
         vsftpd \
         openrc
 
-RUN			rc-update add vsftpd default
+#RUN			rc-update add vsftpd default
 
 #RUN		rc-service vsftpd restart
 

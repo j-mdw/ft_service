@@ -27,17 +27,20 @@ tgf_yaml="$tgf_dir""depl_telegraf.yaml"
 gfa_yaml="$gfa_dir""depl_grafana.yaml"
 idb_yaml="$idb_dir""depl_influxdb.yaml"
 
-#   Script exits when any command fails
+#   Scripts
+
+mlb_install="$mlb_dir""metallb_install.sh"
+
+#   sh exits when any command fails
 
 set -e
 
 #	Minikube setup
-#minikube delete
-# minikube start --driver=docker
-eval $(minikube -p minikube docker-env)
 
-#   Scripts
-mlb_install="$mlb_dir""metallb_install.sh"
+#minikube delete
+minikube start --driver=docker
+
+eval $(minikube -p minikube docker-env)
 
 #	Stopping nginx on localhost
 

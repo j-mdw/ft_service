@@ -12,6 +12,7 @@ xferlog_enable=YES
 connect_from_port_20=YES
 pam_service_name=vsftpd
 seccomp_sandbox=NO
+#local_umask=022
 
 anon_umask=022
 # Enable upload by local user.
@@ -42,6 +43,5 @@ ssl_sslv2=NO
 ssl_sslv3=NO
 
 EOF
-
 
 vsftpd /etc/vsftpd/vsftpd.conf

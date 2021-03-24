@@ -6,5 +6,7 @@ Grafana
 - Datasources provisionning: change db address
 - Create dashboards
 
+Try other way to use Persistent Volumes, lots of bugs right now when deleting the PVC or even the PV
+
 K8s:
 - Put service on top of config files
