@@ -1,8 +1,13 @@
 #!/bin/sh
 
-mkdir -R /srv/ftp
-chown nobody:nogroup /srv/ftp
-echo "Good morning" | tee /srv/ftp/anon.txt
+mkdir  /ftp
+chmod 755 /ftp
+chown nobody:nogroup /ftp
+mkdir /ftp/anon_upload
+chown ftp:root /ftp/anon_upload
+chmod 0777 /ftp/anon_upload/
+
+echo "Good morning" | tee /ftp/anon.txt
 #chmod a+rwx ftp
 
 cat <<EOF | tee /etc/vsftpd/vsftpd.conf
@@ -17,11 +22,11 @@ seccomp_sandbox=NO
 anon_umask=022
 # Enable upload by local user.
 write_enable=YES
-
+allow_writeable_chroot=YES
 # Enable read by anonymous user (without username and password).
 secure_chroot_dir=/var/empty
 anonymous_enable=YES
-anon_root=/srv/ftp
+anon_root=/ftp
 no_anon_password=YES
 anon_upload_enable=YES
 anon_mkdir_write_enable=YES
@@ -31,8 +36,8 @@ anon_other_write_enable=YES
 #port_enable=YES
 
 pasv_enable=YES
+pasv_min_port=10090
 pasv_max_port=10100
-pasv_min_port=10098
 
 rsa_cert_file=/root/certs/cert.pem
 rsa_private_key_file=/root/certs/key.pem

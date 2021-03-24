@@ -48,18 +48,18 @@ eval $(minikube -p minikube docker-env)
 
 #	Creating TLS certificates
 
-  mkdir -p certs
-  cd certs
-  chmod -f 666 key.pem
-  openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -batch -out cert.pem -keyout key.pem
-  chmod 666 key.pem
-  cd ..
-  cp -f certs/*.pem "$ngx_dir"srcs
-  cp -f certs/*.pem "$wp_dir"srcs
-  cp -f certs/*.pem "$pma_dir"srcs
-  cp -f certs/*.pem "$ftp_dir"srcs
+  # mkdir -p certs
+  # cd certs
+  # chmod -f 666 key.pem
+  # openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -batch -out cert.pem -keyout key.pem
+  # chmod 666 key.pem
+  # cd ..
+  # cp -f certs/*.pem "$ngx_dir"srcs
+  # cp -f certs/*.pem "$wp_dir"srcs
+  # cp -f certs/*.pem "$pma_dir"srcs
+  # cp -f certs/*.pem "$ftp_dir"srcs
 
-  chmod 400 certs/key.pem "$ngx_dir"srcs/key.pem "$wp_dir"srcs/key.pem "$pma_dir"srcs/key.pem "$ftp_dir"srcs/key.pem
+  # chmod 400 certs/key.pem "$ngx_dir"srcs/key.pem "$wp_dir"srcs/key.pem "$pma_dir"srcs/key.pem "$ftp_dir"srcs/key.pem
 
 #   Metallab install and start
 
@@ -84,9 +84,9 @@ sed -E -i s/'  EXT_IP:'".*"/"  EXT_IP: ""$k8s_ip"/ $cnf_map
 #docker build $pma_dir -t phpmyadmin-service
 #docker build $msq_dir -t mysql-service
 docker build $ftp_dir -t ftps-service
-docker build $idb_dir -t influxdb-service
-docker build $tgf_dir -t telegraf-service
-docker build $gfa_dir -t grafana-service
+# docker build $idb_dir -t influxdb-service
+# docker build $tgf_dir -t telegraf-service
+# docker build $gfa_dir -t grafana-service
 
 #docker run --rm -d -p 80:80 -p 443:443 nginx-service
 #docker run --rm -d -p 5050:5050 wordpress-service
@@ -104,9 +104,9 @@ kubectl apply -f $secret_yaml
 #kubectl apply -f $wp_yaml
 #kubectl apply -f $pma_yaml
 kubectl apply -f $ftp_yaml
-kubectl apply -f $tgf_yaml
-kubectl apply -f $gfa_yaml
-kubectl apply -f $idb_yaml
+# kubectl apply -f $tgf_yaml
+# kubectl apply -f $gfa_yaml
+# kubectl apply -f $idb_yaml
 
 # Dashboard
 minikube dashboard & #open kubernetes dashboard
