@@ -1,6 +1,9 @@
 #!/bin/sh
 
-wp core install --url="https://"$EXT_IP":5050" --title="BS_Website" --admin_user="admin" --admin_password="admin" --admin_email="admin@admin.admin"
+
+while true; do
+	wp core install --url="https://"$EXT_IP":5050" --title="BS_Website" --admin_user="admin" --admin_password="admin" --admin_email="admin@admin.admin" && break;
+done;
 
 wp user create wpuser1 wpuser1@wp.wp --role=editor --user_pass=wpuser1
 

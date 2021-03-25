@@ -10,3 +10,5 @@ kubectl delete -f srcs/mysql/depl_mysql.yaml
 kubectl delete -f srcs/influxdb/depl_influxdb.yaml
 kubectl delete -f srcs/service_configmap.yaml
 kubectl delete -f srcs/secrets.yaml
+
+minikube stop
