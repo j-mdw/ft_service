@@ -1,9 +1,0 @@
-Reverse Proxy - blank page issue
-
-Grafana
-- Create dashboards
-
-K8s:
-- Put service on top of config files
-
-ftps dashboard: need to configure influxdb properly
