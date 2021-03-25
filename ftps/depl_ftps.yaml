@@ -32,6 +32,12 @@ spec:
         - containerPort: 10098
         - containerPort: 10099
         - containerPort: 10100
+        env:
+        - name: EXT_IP
+          valueFrom:
+            configMapKeyRef:
+              name: service-configmap
+              key: EXT_IP
       restartPolicy: Always
 ---
 apiVersion: v1

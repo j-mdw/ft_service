@@ -1,7 +1,5 @@
 FROM	alpine:latest
 
-#NGINX installation
-
 COPY	srcs/default.conf /etc/nginx/http.d/
 
 RUN		mkdir /root/certs
@@ -18,7 +16,9 @@ RUN	\
 		php-json\
 		php-session\
 		php-mbstring\
-		php-mysqli &&\
+		php-mysqli \
+		php-phar \
+		curl &&\
 		mkdir -p /run/nginx
 
 WORKDIR	/var/www/localhost/htdocs
@@ -42,6 +42,14 @@ RUN		sed -i "s/password_here/user1/" wp-config.php
 
 RUN		sed -i "s/localhost/mysql-service/" wp-config.php
 
+#wp-cli install
+RUN		apk add php-phar curl
+RUN		curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN		chmod +x wp-cli.phar
+RUN		mv wp-cli.phar /usr/local/bin/wp
+
+COPY	srcs/wp_setup.sh .
+
 EXPOSE	5050
 
-CMD		["/bin/sh", "-c", "/usr/sbin/php-fpm7; exec nginx -g 'daemon off;';"]
+CMD		sh wp_setup.sh

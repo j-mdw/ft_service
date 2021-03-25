@@ -34,6 +34,7 @@ RUN		tar -xf phpMyAdmin-latest-english.tar.gz &&\
 
 # ARG		DNS="mysql-service.default.svc.cluster.local"
 ARG 		DNS="mysql-service"
+ENV			PMA_ABLOSULE_URI="https://phpmyadmin-service/phpmyadmin"
 
 RUN		sed -i s/localhost/"${DNS}"/g phpmyadmin/config.sample.inc.php && \
 		mv phpmyadmin/config.sample.inc.php phpmyadmin/config.inc.php && \

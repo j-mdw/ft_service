@@ -38,6 +38,7 @@ anon_other_write_enable=YES
 pasv_enable=YES
 pasv_min_port=10090
 pasv_max_port=10100
+pasv_address=$EXT_IP
 
 rsa_cert_file=/root/certs/cert.pem
 rsa_private_key_file=/root/certs/key.pem

@@ -1,18 +1,9 @@
 FROM	alpine:latest
 
 RUN     apk add \
-		grafana\
-		curl
+				grafana
 
-# COPY	srcs/dashboard_prov.yaml /usr/share/grafana/conf/provisioning/dashboards
-
-COPY	srcs/db_prov.yaml /usr/share/grafana/conf/provisioning/datasources
-
-# ENV				INFDB_NAME="telegrafdb"
-
-# ENV				INFDB_USER="telegraf"
-
-# ENV				INFDB_PW="password"
+COPY				srcs/grafana.db /usr/share/grafana/data/grafana.db
 
 CMD		cd /usr/share/grafana; \
         grafana-server
