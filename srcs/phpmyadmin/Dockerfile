@@ -1,6 +1,4 @@
-FROM	alpine:latest
-
-#NGINX installation
+FROM	alpine:3.13
 
 COPY	srcs/default.conf /etc/nginx/http.d/
 

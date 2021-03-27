@@ -1,6 +1,4 @@
-FROM	alpine:latest
-
-#MYSQL installation
+FROM	alpine:3.13
 
 RUN		apk add\
 		mysql\

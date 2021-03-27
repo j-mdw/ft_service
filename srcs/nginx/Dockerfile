@@ -1,4 +1,4 @@
-FROM	alpine:latest
+FROM	alpine:3.13
 
 COPY	srcs/default.conf /etc/nginx/http.d/
 COPY	srcs/index.html /var/www/localhost/htdocs/
