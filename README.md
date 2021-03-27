@@ -4,19 +4,19 @@ Kubernetes Cluster
 
 Services:
 
-LEMP stack \n
-Nginx - ports 80 and 443 \n
-Wordpress - port 5000 \n
-phpMyAdmin - port 5050 \n
-mysql (mariaDB)
+LEMP stack  
+Nginx - ports 80 and 443  
+Wordpress - port 5000  
+phpMyAdmin - port 5050  
+mysql (mariaDB)  
 
-TIG stack:
-Grafana - port 3000 \n
-InfluxDB \n
-Telegraf
+TIG stack:  
+Grafana - port 3000  
+InfluxDB  
+Telegraf  
 
-FTPs server: \n
-vsftpd - port 21
+FTPs server:  
+vsftpd - port 21  
 
 Base image: Alpine linux (v. 3.13)
 
