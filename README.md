@@ -4,7 +4,7 @@ Kubernetes Cluster
 
 Services:
 
-LEMP stack  
+LEMP stack:  
 Nginx - ports 80 and 443  
 Wordpress - port 5000  
 phpMyAdmin - port 5050  
